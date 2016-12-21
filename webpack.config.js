@@ -1,10 +1,14 @@
 var path = require('path');
 
 module.exports = {
-  entry: './src/content.js',
+  entry: {
+    content: './src/content.js',
+    background: './src/background.js'
+  },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'content.js'
+    // TODO: understand publicPath property
+    filename: '[name].js'
   },
   module: {
     rules: [
@@ -26,4 +30,4 @@ module.exports = {
       'vue$': 'vue/dist/vue.common.js' // use the standalone build
     }
   }
-}
+};

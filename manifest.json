@@ -6,7 +6,7 @@
     "tabs"
   ],
   "background": {
-    "scripts": ["src/background.js"]
+    "scripts": ["dist/background.js"]
   },
   "content_scripts": [
     {
