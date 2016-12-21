@@ -1,3 +1,5 @@
+import Vue from 'vue';
+
 console.log('Hello from content.js');
 console.log('chrome', chrome);
 
