@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import App from './App';
 
 console.log('Hello from content.js');
 console.log('chrome', chrome);
@@ -10,19 +11,9 @@ const anchor = document.createElement('div');
 anchor.id = 'tabio';
 document.body.insertBefore(anchor, document.body.childNodes[0]);
 
-let App = Vue.component('app', {
-  template: `<div id="tabio" v-if="isVisible">Hello World</div>`,
-  data() {
-    return {
-      isVisible: true
-    };
-  }
-});
-
 // create root instance
 new Vue({
   el: '#tabio',
-  render(createElement) {
-    return createElement(App);
-  }
+  template: '<app />',
+  components: {App}
 });
