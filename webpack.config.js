@@ -1,5 +1,7 @@
 var path = require('path');
 
+// TODO: handle static assets (i.e. icons)
+
 module.exports = {
   entry: {
     content: './src/content.js',
