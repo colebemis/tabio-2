@@ -3,13 +3,14 @@
 </template>
 
 <script>
+  import {mapState} from 'vuex';
+
   export default {
     name: 'app',
-    computed: {
-      isVisible() {
-        return this.$store.state.isVisible;
-      }
-    }
+    computed: mapState([
+      // map this.isVisible to store.state.isVisible
+      'isVisible'
+    ])
   }
 </script>
 
