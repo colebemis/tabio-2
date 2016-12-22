@@ -15,10 +15,12 @@ Vue.use(Vuex);
 
 const store = new Vuex.Store ({
   state: {
-    isVisible: false
+    isVisible: false,
+    tabGroups: []
   },
   mutations: {
-    showExtension(state) {
+    showExtension(state, tabGroups) {
+      state.tabGroups = tabGroups;
       state.isVisible = true;
     },
     hideExtension(state) {
@@ -39,6 +41,6 @@ chrome.runtime.onMessage.addListener(message => {
   if (store.state.isVisible) {
     store.commit('hideExtension');
   } else {
-    store.commit('showExtension');
+    store.commit('showExtension', message);
   }
 });

@@ -1,6 +1,7 @@
 <template>
   <div id="tabio" v-if="isVisible">
     Hello from App.vue
+    {{JSON.stringify(tabGroups)}}
     <button type="button" @click="hideExtension()">Hide</button>
   </div>
 </template>
@@ -12,7 +13,8 @@
     name: 'app',
     computed: mapState([
       // map this.isVisible to this.$store.state.isVisible
-      'isVisible'
+      'isVisible',
+      'tabGroups'
     ]),
     methods: mapMutations([
       // map this.hideExtension() to this.$store.commit('hideExtension')
