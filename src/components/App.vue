@@ -1,10 +1,15 @@
 <template>
-  <div id="tabio">Hello from App.vue</div>
+  <div id="tabio" v-if="isVisible">Hello from App.vue</div>
 </template>
 
 <script>
   export default {
-    name: 'app'
+    name: 'app',
+    computed: {
+      isVisible() {
+        return this.$store.state.isVisible;
+      }
+    }
   }
 </script>
 

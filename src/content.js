@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import Vuex from 'vuex';
 import App from './components/App';
 
 console.log('Hello from content.js');
@@ -11,9 +12,18 @@ const root = document.createElement('div');
 root.id = 'tabio';
 document.body.insertBefore(root, document.body.childNodes[0]);
 
+Vue.use(Vuex);
+
+const store = new Vuex.Store ({
+  state: {
+    isVisible: true
+  }
+});
+
 // create root Vue instance
 new Vue({
   el: '#tabio',
-  template: '<app/>',
-  components: {App}
+  store,
+  components: {App},
+  template: '<app/>'
 });
