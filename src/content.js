@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import App from './App';
+import App from './components/App';
 
 console.log('Hello from content.js');
 console.log('chrome', chrome);
