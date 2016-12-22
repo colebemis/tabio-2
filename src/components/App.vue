@@ -1,15 +1,22 @@
 <template>
-  <div id="tabio" v-if="isVisible">Hello from App.vue</div>
+  <div id="tabio" v-if="isVisible">
+    Hello from App.vue
+    <button type="button" @click="hideExtension()">Hide</button>
+  </div>
 </template>
 
 <script>
-  import {mapState} from 'vuex';
+  import {mapState, mapMutations} from 'vuex';
 
   export default {
     name: 'app',
     computed: mapState([
-      // map this.isVisible to store.state.isVisible
+      // map this.isVisible to this.$store.state.isVisible
       'isVisible'
+    ]),
+    methods: mapMutations([
+      // map this.hideExtension() to this.$store.commit('hideExtension')
+      'hideExtension'
     ])
   }
 </script>

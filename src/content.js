@@ -17,6 +17,11 @@ Vue.use(Vuex);
 const store = new Vuex.Store ({
   state: {
     isVisible: true
+  },
+  mutations: {
+    hideExtension(state) {
+      state.isVisible = false;
+    }
   }
 });
 
