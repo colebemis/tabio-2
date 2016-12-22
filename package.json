@@ -1,6 +1,10 @@
 {
   "name": "tabio",
   "version": "0.1.0",
+  "scripts": {
+    "build": "[ -d dist ] || mkdir dist; cp manifest.json dist/",
+    "start": "webpack --watch"
+  },
   "devDependencies": {
     "autoprefixer": "^6.5.4",
     "babel-core": "^6.21.0",
