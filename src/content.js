@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import store from './store';
 import App from './components/App';
 
 console.log('Hello from content.js');
@@ -9,39 +10,6 @@ console.log('chrome', chrome);
 const root = document.createElement('div');
 root.id = 'tabio';
 document.body.insertBefore(root, document.body.childNodes[0]);
-
-
-// TODO: move to store.js
-// create Vuex store
-Vue.use(Vuex);
-
-const store = new Vuex.Store({
-  state: {
-    isOpen: false,
-    tabGroups: []
-  },
-  mutations: {
-    openExtension(state, tabGroups) {
-      state.tabGroups = tabGroups;
-      state.isOpen = true;
-    },
-    closeExtension(state) {
-      state.isOpen = false;
-    }
-  },
-  actions: {
-    goToTab(context, {tabId, windowId, active, focused}) {
-      if (active && focused) {
-        context.commit('closeExtension');
-      } else {
-        chrome.runtime.sendMessage({
-          action: 'goToTab',
-          payload: {tabId, windowId}
-        });
-      }
-    }
-  }
-});
 
 // create root Vue instance
 new Vue({
