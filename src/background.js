@@ -3,7 +3,9 @@ console.log('chrome', chrome);
 
 chrome.browserAction.onClicked.addListener(tab => {
   chrome.windows.getAll({populate: true}, tabGroups => {
-    // TODO: send event type
-    chrome.tabs.sendMessage(tab.id, tabGroups);
+    chrome.tabs.sendMessage(tab.id, {
+      event: 'browserActionClicked',
+      payload: tabGroups
+    });
   });
 });

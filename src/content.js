@@ -37,10 +37,14 @@ new Vue({
   template: '<app/>'
 });
 
-chrome.runtime.onMessage.addListener(message => {
-  if (store.state.isVisible) {
-    store.commit('hideExtension');
-  } else {
-    store.commit('showExtension', message);
+chrome.runtime.onMessage.addListener(({event, payload}) => {
+  switch (event) {
+    case 'browserActionClicked':
+      if (store.state.isVisible) {
+        store.commit('hideExtension');
+      } else {
+        store.commit('showExtension', payload);
+      }
+      break;
   }
 });
