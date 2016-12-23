@@ -37,14 +37,20 @@ new Vue({
   template: '<app/>'
 });
 
+// TODO: move to event-handlers.js
+function browserActionClickedHandler(store, payload) {
+  if (store.state.isVisible) {
+    store.commit('hideExtension');
+  } else {
+    store.commit('showExtension', payload);
+  }
+}
+
 chrome.runtime.onMessage.addListener(({event, payload}) => {
   switch (event) {
+    // TODO: use constants for event types
     case 'browserActionClicked':
-      if (store.state.isVisible) {
-        store.commit('hideExtension');
-      } else {
-        store.commit('showExtension', payload);
-      }
+      browserActionClickedHandler(store, payload);
       break;
   }
 });
