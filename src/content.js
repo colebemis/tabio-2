@@ -48,11 +48,20 @@ function browserActionClickedHandler(store, payload) {
   }
 }
 
+function tabDeactivatedHandler(store) {
+  if (store.state.isVisible) {
+    store.commit('hideExtension');
+  }
+}
+
 chrome.runtime.onMessage.addListener(({event, payload}) => {
   switch (event) {
     // TODO: use constants for event types
     case 'browserActionClicked':
       browserActionClickedHandler(store, payload);
+      break;
+    case 'tabDeactivated':
+      tabDeactivatedHandler(store);
       break;
   }
 });
