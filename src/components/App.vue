@@ -1,11 +1,11 @@
 <template>
-  <div id="tabio" v-if="isVisible">
+  <div id="tabio" v-if="isOpen">
     <ul v-for="tabGroup in tabGroups">
       <li v-for="tab in tabGroup.tabs">
         {{tab.title}}
       </li>
     </ul>
-    <button type="button" @click="hideExtension()">Hide</button>
+    <button type="button" @click="closeExtension()">Hide</button>
   </div>
 </template>
 
@@ -15,11 +15,11 @@
   export default {
     name: 'app',
     computed: mapState([
-      'isVisible', // map this.isVisible to this.$store.state.isVisible
+      'isOpen', // map this.isOpen to this.$store.state.isOpen
       'tabGroups'
     ]),
     methods: mapMutations([
-      'hideExtension' // map this.hideExtension() to this.$store.commit('hideExtension')
+      'closeExtension' // map this.closeExtension() to this.$store.commit('closeExtension')
     ])
   }
 </script>

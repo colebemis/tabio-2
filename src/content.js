@@ -17,16 +17,16 @@ Vue.use(Vuex);
 
 const store = new Vuex.Store({
   state: {
-    isVisible: false,
+    isOpen: false,
     tabGroups: []
   },
   mutations: {
-    showExtension(state, tabGroups) {
+    openExtension(state, tabGroups) {
       state.tabGroups = tabGroups;
-      state.isVisible = true;
+      state.isOpen = true;
     },
-    hideExtension(state) {
-      state.isVisible = false;
+    closeExtension(state) {
+      state.isOpen = false;
     }
   }
 });
@@ -41,16 +41,16 @@ new Vue({
 
 // TODO: move to event-handlers.js
 function browserActionClickedHandler(store, payload) {
-  if (store.state.isVisible) {
-    store.commit('hideExtension');
+  if (store.state.isOpen) {
+    store.commit('closeExtension');
   } else {
-    store.commit('showExtension', payload);
+    store.commit('openExtension', payload);
   }
 }
 
 function tabDeactivatedHandler(store) {
-  if (store.state.isVisible) {
-    store.commit('hideExtension');
+  if (store.state.isOpen) {
+    store.commit('closeExtension');
   }
 }
 
