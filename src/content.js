@@ -28,6 +28,14 @@ const store = new Vuex.Store({
     closeExtension(state) {
       state.isOpen = false;
     }
+  },
+  actions: {
+    goToTab(context, tabData) {
+      chrome.runtime.sendMessage({
+        action: 'goToTab',
+        payload: tabData
+      });
+    }
   }
 });
 

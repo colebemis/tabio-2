@@ -28,3 +28,12 @@ function browserActionClickedHandler(tab) {
 chrome.browserAction.onClicked.addListener(browserActionClickedHandler);
 chrome.tabs.onActivated.addListener(activeTabChangedHandler);
 chrome.windows.onFocusChanged.addListener(activeTabChangedHandler);
+
+chrome.runtime.onMessage.addListener(({action, payload}) => {
+  switch (action) {
+    case 'goToTab':
+      chrome.tabs.update(payload.tabId, {active: true});
+      chrome.windows.update(payload.windowId, {focused: true});
+      break;
+  }
+});
