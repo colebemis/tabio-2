@@ -10,10 +10,12 @@ const root = document.createElement('div');
 root.id = 'tabio';
 document.body.insertBefore(root, document.body.childNodes[0]);
 
+
+// TODO: move to store.js
 // create Vuex store
 Vue.use(Vuex);
 
-const store = new Vuex.Store ({
+const store = new Vuex.Store({
   state: {
     isVisible: false,
     tabGroups: []
