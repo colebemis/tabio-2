@@ -30,11 +30,15 @@ const store = new Vuex.Store({
     }
   },
   actions: {
-    goToTab(context, tabData) {
-      chrome.runtime.sendMessage({
-        action: 'goToTab',
-        payload: tabData
-      });
+    goToTab(context, {tabId, windowId, active, focused}) {
+      if (active && focused) {
+        context.commit('closeExtension');
+      } else {
+        chrome.runtime.sendMessage({
+          action: 'goToTab',
+          payload: {tabId, windowId}
+        });
+      }
     }
   }
 });
