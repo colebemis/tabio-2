@@ -16,6 +16,9 @@ const mutations = {
   },
   closeExtension(state) {
     state.isOpen = false;
+  },
+  updateTabGroups(state, tabGroups) {
+    state.tabGroups = tabGroups;
   }
 };
 
@@ -29,6 +32,12 @@ const actions = {
         payload: {tabId, windowId}
       });
     }
+  },
+  closeTab({commit}, tabId) {
+    chrome.runtime.sendMessage({
+      action: 'closeTab',
+      payload: {tabId}
+    });
   }
 };
 

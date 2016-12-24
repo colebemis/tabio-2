@@ -9,6 +9,7 @@
           active: tab.active,
           focused: tabGroup.focused
         })">Go</button>
+        <button type="button" @click="closeTab(tab.id)">Close</button>
       </li>
     </ul>
     <button type="button" @click="closeExtension()">Hide</button>
@@ -29,7 +30,8 @@
         'closeExtension' // map this.closeExtension() to this.$store.commit('closeExtension')
       ]),
       ...mapActions([
-        'goToTab'
+        'goToTab',
+        'closeTab'
       ])
     }
   }

@@ -19,12 +19,27 @@ new Vue({
   template: '<app/>'
 });
 
+chrome.runtime.onMessage.addListener(({event, payload}) => {
+  switch (event) {
+    // TODO: use constants for event types
+    case 'browserActionClicked':
+      browserActionClickedHandler(store, payload.tabGroups);
+      break;
+    case 'tabDeactivated':
+      tabDeactivatedHandler(store);
+      break;
+    case 'tabGroupsChanged':
+      tabGroupsChangedHandler(store, payload.tabGroups);
+      break;
+  }
+});
+
 // TODO: move to event-handlers.js
-function browserActionClickedHandler(store, payload) {
+function browserActionClickedHandler(store, tabGroups) {
   if (store.state.isOpen) {
     store.commit('closeExtension');
   } else {
-    store.commit('openExtension', payload);
+    store.commit('openExtension', tabGroups);
   }
 }
 
@@ -34,14 +49,8 @@ function tabDeactivatedHandler(store) {
   }
 }
 
-chrome.runtime.onMessage.addListener(({event, payload}) => {
-  switch (event) {
-    // TODO: use constants for event types
-    case 'browserActionClicked':
-      browserActionClickedHandler(store, payload);
-      break;
-    case 'tabDeactivated':
-      tabDeactivatedHandler(store);
-      break;
+function tabGroupsChangedHandler(store, tabGroups) {
+  if (store.state.isOpen) {
+    store.commit('updateTabGroups', tabGroups);
   }
-});
+}
