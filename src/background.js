@@ -3,16 +3,11 @@ console.log('chrome', chrome);
 
 let activeTabId = null;
 
-function activeTabChangedHandler() {
-  // if tabio was not activated, do nothing
-  if (activeTabId === null) return;
-
-  chrome.tabs.sendMessage(activeTabId, {
-    event: 'tabDeactivated'
-  });
-
-  activeTabId = null;
-}
+chrome.browserAction.onClicked.addListener(browserActionClickedHandler);
+chrome.tabs.onRemoved.addListener(tabRemovedHandler);
+chrome.tabs.onActivated.addListener(activeTabChangedHandler);
+chrome.windows.onFocusChanged.addListener(activeTabChangedHandler);
+chrome.runtime.onMessage.addListener(messageHandler);
 
 function browserActionClickedHandler(tab) {
   activeTabId = tab.id;
@@ -25,11 +20,7 @@ function browserActionClickedHandler(tab) {
   });
 }
 
-chrome.browserAction.onClicked.addListener(browserActionClickedHandler);
-chrome.tabs.onActivated.addListener(activeTabChangedHandler);
-chrome.windows.onFocusChanged.addListener(activeTabChangedHandler);
-
-chrome.tabs.onRemoved.addListener(() => {
+function tabRemovedHandler() {
   // if tabio was not activated, do nothing
   if (activeTabId === null) return;
 
@@ -39,9 +30,20 @@ chrome.tabs.onRemoved.addListener(() => {
       payload: {tabGroups}
     });
   });
-});
+}
 
-chrome.runtime.onMessage.addListener(({action, payload}) => {
+function activeTabChangedHandler() {
+  // if tabio was not activated, do nothing
+  if (activeTabId === null) return;
+
+  chrome.tabs.sendMessage(activeTabId, {
+    event: 'tabDeactivated'
+  });
+
+  activeTabId = null;
+}
+
+function messageHandler({action, payload}) {
   switch (action) {
     case 'goToTab':
       chrome.tabs.update(payload.tabId, {active: true});
@@ -51,4 +53,4 @@ chrome.runtime.onMessage.addListener(({action, payload}) => {
       chrome.tabs.remove(payload.tabId);
       break;
   }
-});
+}
