@@ -5,6 +5,7 @@ Vue.use(Vuex);
 
 const state = {
   isOpen: false,
+  filterText: '',
   tabGroups: []
 };
 
@@ -16,9 +17,13 @@ const mutations = {
   },
   closeExtension(state) {
     state.isOpen = false;
+    state.filterText = ''
   },
   updateTabGroups(state, tabGroups) {
     state.tabGroups = tabGroups;
+  },
+  updateFilterText(state, filterText) {
+    state.filterText = filterText;
   }
 };
 

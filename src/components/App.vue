@@ -1,5 +1,8 @@
 <template>
   <div id="tabio" v-if="isOpen">
+    <input type="text" :value="filterText" @input="updateFilterText($event.target.value)">
+    <p>{{filterText}}<p>
+
     <ul v-for="tabGroup in tabGroups">
       <li v-for="tab in tabGroup.tabs">
         {{tab.title}}
@@ -23,11 +26,13 @@
     name: 'app',
     computed: mapState([
       'isOpen', // map this.isOpen to this.$store.state.isOpen
+      'filterText',
       'tabGroups'
     ]),
     methods: {
       ...mapMutations([
-        'closeExtension' // map this.closeExtension() to this.$store.commit('closeExtension')
+        'closeExtension', // map this.closeExtension() to this.$store.commit('closeExtension')
+        'updateFilterText'
       ]),
       ...mapActions([
         'goToTab',
