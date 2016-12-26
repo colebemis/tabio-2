@@ -3,6 +3,19 @@
     <input type="text" :value="filterText" @input="updateFilterText($event.target.value)">
     <p>{{filterText}}<p>
 
+    <ul v-for="tabGroup in filteredTabGroups">
+      <li v-for="tab in tabGroup.tabs">
+        {{tab.title}}
+        <button type="button" @click="goToTab({
+          tabId: tab.id,
+          windowId: tab.windowId,
+          active: tab.active,
+          focused: tabGroup.focused
+        })">Go</button>
+        <button type="button" @click="closeTab(tab.id)">Close</button>
+      </li>
+    </ul>
+
     <ul v-for="tabGroup in tabGroups">
       <li v-for="tab in tabGroup.tabs">
         {{tab.title}}
@@ -20,15 +33,20 @@
 </template>
 
 <script>
-  import {mapState, mapMutations, mapActions} from 'vuex';
+  import {mapState, mapGetters, mapMutations, mapActions} from 'vuex';
 
   export default {
     name: 'app',
-    computed: mapState([
-      'isOpen', // map this.isOpen to this.$store.state.isOpen
-      'filterText',
-      'tabGroups'
-    ]),
+    computed: {
+      ...mapState([
+        'isOpen', // map this.isOpen to this.$store.state.isOpen
+        'filterText',
+        'tabGroups'
+      ]),
+      ...mapGetters([
+        'filteredTabGroups'
+      ])
+    },
     methods: {
       ...mapMutations([
         'closeExtension', // map this.closeExtension() to this.$store.commit('closeExtension')

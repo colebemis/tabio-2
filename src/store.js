@@ -9,6 +9,12 @@ const state = {
   tabGroups: []
 };
 
+const getters = {
+  filteredTabGroups(state) {
+    return state.tabGroups;
+  }
+};
+
 const mutations = {
   // TODO: use constants for mutation names
   openExtension(state, tabGroups) {
@@ -48,6 +54,7 @@ const actions = {
 
 export default new Vuex.Store({
   state,
+  getters,
   mutations,
   actions
 });
