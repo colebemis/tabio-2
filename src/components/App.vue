@@ -15,19 +15,7 @@
         <button type="button" @click="closeTab(tab.id)">Close</button>
       </li>
     </ul>
-
-    <ul v-for="tabGroup in tabGroups">
-      <li v-for="tab in tabGroup.tabs">
-        {{tab.title}}
-        <button type="button" @click="goToTab({
-          tabId: tab.id,
-          windowId: tab.windowId,
-          active: tab.active,
-          focused: tabGroup.focused
-        })">Go</button>
-        <button type="button" @click="closeTab(tab.id)">Close</button>
-      </li>
-    </ul>
+    
     <button type="button" @click="closeExtension()">Hide</button>
   </div>
 </template>

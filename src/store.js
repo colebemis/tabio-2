@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import fuseFilter from './fuse-filter';
 
 Vue.use(Vuex);
 
@@ -10,8 +11,18 @@ const state = {
 };
 
 const getters = {
-  filteredTabGroups(state) {
-    return state.tabGroups;
+  filteredTabGroups({tabGroups, filterText}) {
+    return tabGroups.map(tabGroup => {
+      const filteredTabs = {
+        tabs: fuseFilter({
+          list: tabGroup.tabs,
+          filterText,
+          keys: ['title', 'url']
+        })
+      };
+
+      return Object.assign({}, tabGroup, filteredTabs);
+    });
   }
 };
 
