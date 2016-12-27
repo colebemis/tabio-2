@@ -4,6 +4,7 @@
     v-if="isOpen"
     @keydown.down.stop.prevent="selectNextTab(filteredTabGroups)"
     @keydown.up.stop.prevent="selectPrevTab(filteredTabGroups)"
+    @keydown.meta.delete.stop.prevent="closeTab({tabId: selectedTab.id, windowId: selectedTab.windowId})"
   >
     <input type="text" v-focus :value="filterText" @input="inputHandler">
     <p>{{filterText}}</p>
