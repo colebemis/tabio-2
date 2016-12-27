@@ -1,6 +1,6 @@
 <template>
   <div id="tabio" v-if="isOpen">
-    <input type="text" :value="filterText" @input="updateFilterText($event.target.value)">
+    <input type="text" v-focus :value="filterText" @input="updateFilterText($event.target.value)">
     <p>{{filterText}}<p>
 
     <ul v-for="tabGroup in filteredTabGroups" v-if="tabGroup.tabs.length">
@@ -25,6 +25,20 @@
 
   export default {
     name: 'app',
+    directives: {
+      focus: {
+        // when the bound element is inserted into the DOM
+        inserted(el) {
+          // focus the element
+          el.focus();
+        },
+        // after the containing component and its children have updated
+        componentUpdated(el) {
+          // focus the element
+          el.focus();
+        }
+      }
+    },
     computed: {
       ...mapState([
         'isOpen', // map this.isOpen to this.$store.state.isOpen
