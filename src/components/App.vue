@@ -3,7 +3,7 @@
     <input type="text" :value="filterText" @input="updateFilterText($event.target.value)">
     <p>{{filterText}}<p>
 
-    <ul v-for="tabGroup in filteredTabGroups">
+    <ul v-for="tabGroup in filteredTabGroups" v-if="tabGroup.tabs.length">
       <li v-for="tab in tabGroup.tabs">
         {{tab.title}}
         <button type="button" @click="goToTab({
@@ -15,7 +15,7 @@
         <button type="button" @click="closeTab(tab.id)">Close</button>
       </li>
     </ul>
-    
+
     <button type="button" @click="closeExtension()">Hide</button>
   </div>
 </template>
