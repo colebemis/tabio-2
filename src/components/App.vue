@@ -5,7 +5,7 @@
     @keydown.down.prevent="selectNextTab(filteredTabGroups)"
     @keydown.up.prevent="selectPrevTab(filteredTabGroups)"
   >
-    <input type="text" v-focus :value="filterText" @input="updateFilterText($event.target.value)">
+    <input type="text" v-focus :value="filterText" @input="inputHandler">
     <p>{{filterText}}</p>
 
     <ul v-for="tabGroup in filteredTabGroups">
@@ -64,12 +64,20 @@
         'updateFilterText',
         'selectTab',
         'selectNextTab',
-        'selectPrevTab'
+        'selectPrevTab',
+        'selectActiveTab'
       ]),
       ...mapActions([
         'goToTab',
         'closeTab'
-      ])
+      ]),
+      inputHandler(event) {
+        this.updateFilterText(event.target.value);
+
+        if (!event.target.value) {
+          this.selectActiveTab(this.filteredTabGroups);
+        }
+      }
     }
   }
 </script>

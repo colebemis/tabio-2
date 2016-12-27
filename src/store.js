@@ -109,8 +109,6 @@ const mutations = {
   selectActiveTab(state, tabGroups) {
     const focusedTabGroupIndex = tabGroups.findIndex(tabGroup => tabGroup.focused);
     const activeTabIndex = tabGroups[focusedTabGroupIndex].tabs.findIndex(tab => tab.active);
-    console.log(focusedTabGroupIndex);
-    console.log(activeTabIndex);
     state.selectedTab = tabGroups[focusedTabGroupIndex].tabs[activeTabIndex];
   }
 };
