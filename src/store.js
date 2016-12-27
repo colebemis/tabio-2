@@ -59,6 +59,8 @@ const mutations = {
     state.selectedTab = tab;
   },
   selectNextTab(state, tabGroups) {
+    if (!tabGroups.length) return;
+
     const selectedTabGroupIndex = tabGroups.findIndex(tabGroup => {
       return tabGroup.id === state.selectedTab.windowId;
     });
@@ -81,6 +83,8 @@ const mutations = {
     }
   },
   selectPrevTab(state, tabGroups) {
+    if (!tabGroups.length) return;
+
     const selectedTabGroupIndex = tabGroups.findIndex(tabGroup => {
       return tabGroup.id === state.selectedTab.windowId;
     });
