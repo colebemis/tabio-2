@@ -58,52 +58,52 @@ const mutations = {
   selectTab(state, tab) {
     state.selectedTab = tab;
   },
-  selectNextTab(state, filteredTabGroups) {
-    const selectedTabGroupIndex = filteredTabGroups.findIndex(tabGroup => {
+  selectNextTab(state, tabGroups) {
+    const selectedTabGroupIndex = tabGroups.findIndex(tabGroup => {
       return tabGroup.id === state.selectedTab.windowId;
     });
 
-    const selectedTabIndex = filteredTabGroups[selectedTabGroupIndex].tabs.findIndex(tab => {
+    const selectedTabIndex = tabGroups[selectedTabGroupIndex].tabs.findIndex(tab => {
       return tab.id === state.selectedTab.id;
     });
 
-    if (selectedTabIndex < filteredTabGroups[selectedTabGroupIndex].tabs.length - 1) {
+    if (selectedTabIndex < tabGroups[selectedTabGroupIndex].tabs.length - 1) {
       // if selected tab is not last tab in selected tabGroup
       // select next tab
-      state.selectedTab = filteredTabGroups[selectedTabGroupIndex].tabs[selectedTabIndex + 1];
-    } else if (selectedTabGroupIndex < filteredTabGroups.length - 1) {
+      state.selectedTab = tabGroups[selectedTabGroupIndex].tabs[selectedTabIndex + 1];
+    } else if (selectedTabGroupIndex < tabGroups.length - 1) {
       // if selected tab is not in last tabGroup
       // select first tab in next tabGroup
-      state.selectedTab = filteredTabGroups[selectedTabGroupIndex + 1].tabs[0];
+      state.selectedTab = tabGroups[selectedTabGroupIndex + 1].tabs[0];
     } else {
       // select first tab in first tabGroup
-      state.selectedTab = filteredTabGroups[0].tabs[0];
+      state.selectedTab = tabGroups[0].tabs[0];
     }
   },
-  selectPrevTab(state, filteredTabGroups) {
-    const selectedTabGroupIndex = filteredTabGroups.findIndex(tabGroup => {
+  selectPrevTab(state, tabGroups) {
+    const selectedTabGroupIndex = tabGroups.findIndex(tabGroup => {
       return tabGroup.id === state.selectedTab.windowId;
     });
 
-    const selectedTabIndex = filteredTabGroups[selectedTabGroupIndex].tabs.findIndex(tab => {
+    const selectedTabIndex = tabGroups[selectedTabGroupIndex].tabs.findIndex(tab => {
       return tab.id === state.selectedTab.id;
     });
 
     if (selectedTabIndex > 0) {
       // if selected tab is not first tab in selected tabGroup
       // select previous tab
-      state.selectedTab = filteredTabGroups[selectedTabGroupIndex].tabs[selectedTabIndex - 1];
+      state.selectedTab = tabGroups[selectedTabGroupIndex].tabs[selectedTabIndex - 1];
     } else if (selectedTabGroupIndex > 0) {
       // if selected tabGroup is not first tabGroup
       // select last tab in previous tabGroup
       const prevTabGroupIndex = selectedTabGroupIndex - 1;
-      const lastTabIndex = filteredTabGroups[prevTabGroupIndex].tabs.length - 1;
-      state.selectedTab = filteredTabGroups[prevTabGroupIndex].tabs[lastTabIndex];
+      const lastTabIndex = tabGroups[prevTabGroupIndex].tabs.length - 1;
+      state.selectedTab = tabGroups[prevTabGroupIndex].tabs[lastTabIndex];
     } else {
       // select last tab in last tabGroup
-      const lastTabGroupIndex = filteredTabGroups.length - 1;
-      const lastTabIndex = filteredTabGroups[lastTabGroupIndex].tabs.length - 1;
-      state.selectedTab = filteredTabGroups[lastTabGroupIndex].tabs[lastTabIndex];
+      const lastTabGroupIndex = tabGroups.length - 1;
+      const lastTabIndex = tabGroups[lastTabGroupIndex].tabs.length - 1;
+      state.selectedTab = tabGroups[lastTabGroupIndex].tabs[lastTabIndex];
     }
   }
 };
