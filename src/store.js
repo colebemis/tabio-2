@@ -7,7 +7,8 @@ Vue.use(Vuex);
 const state = {
   isOpen: false,
   filterText: '',
-  tabGroups: []
+  tabGroups: [],
+  selectedTab: {}
 };
 
 const getters = {
@@ -53,6 +54,9 @@ const mutations = {
   },
   updateFilterText(state, filterText) {
     state.filterText = filterText;
+  },
+  selectTab(state, tab) {
+    state.selectedTab = tab;
   }
 };
 

@@ -4,7 +4,11 @@
     <p>{{filterText}}</p>
 
     <ul v-for="tabGroup in filteredTabGroups" v-if="tabGroup.tabs.length">
-      <li v-for="tab in tabGroup.tabs">
+      <li
+        v-for="tab in tabGroup.tabs"
+        :class="{selected: tab.id === selectedTab.id}"
+        @mouseenter="selectTab(tab)"
+      >
         {{tab.title}}
         <button type="button" @click="goToTab({
           tabId: tab.id,
@@ -42,7 +46,8 @@
     computed: {
       ...mapState([
         'isOpen', // map this.isOpen to this.$store.state.isOpen
-        'filterText'
+        'filterText',
+        'selectedTab'
       ]),
       ...mapGetters([
         'filteredTabGroups'
@@ -51,7 +56,8 @@
     methods: {
       ...mapMutations([
         'closeExtension', // map this.closeExtension() to this.$store.commit('closeExtension')
-        'updateFilterText'
+        'updateFilterText',
+        'selectTab'
       ]),
       ...mapActions([
         'goToTab',
@@ -64,4 +70,8 @@
 <style lang="stylus" scoped>
   #tabio
     color blue
+
+  .selected
+    color white
+    background blue
 </style>
