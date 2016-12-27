@@ -1,9 +1,9 @@
 <template>
-  <div id="tabio" v-if="isOpen">
+  <div id="tabio" v-if="isOpen" @keydown.down.prevent="selectNextTab(filteredTabGroups)">
     <input type="text" v-focus :value="filterText" @input="updateFilterText($event.target.value)">
     <p>{{filterText}}</p>
 
-    <ul v-for="tabGroup in filteredTabGroups" v-if="tabGroup.tabs.length">
+    <ul v-for="tabGroup in filteredTabGroups">
       <li
         v-for="tab in tabGroup.tabs"
         :class="{selected: tab.id === selectedTab.id}"
@@ -57,7 +57,8 @@
       ...mapMutations([
         'closeExtension', // map this.closeExtension() to this.$store.commit('closeExtension')
         'updateFilterText',
-        'selectTab'
+        'selectTab',
+        'selectNextTab'
       ]),
       ...mapActions([
         'goToTab',

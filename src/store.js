@@ -35,7 +35,7 @@ const getters = {
       };
 
       return Object.assign({}, tabGroup, filteredTabs);
-    });
+    }).filter(tabGroup => tabGroup.tabs.length > 0);
   }
 };
 
@@ -57,6 +57,30 @@ const mutations = {
   },
   selectTab(state, tab) {
     state.selectedTab = tab;
+  },
+  selectNextTab(state, filteredTabGroups) {
+    const selectedTabGroupIndex = filteredTabGroups.findIndex(tabGroup => {
+      return tabGroup.id === state.selectedTab.windowId;
+    });
+
+    const selectedTabIndex = filteredTabGroups[selectedTabGroupIndex].tabs.findIndex(tab => {
+      return tab.id === state.selectedTab.id;
+    });
+
+    // if selected tab is not last tab in selected tabGroup
+    if (selectedTabIndex < filteredTabGroups[selectedTabGroupIndex].tabs.length - 1) {
+      // select next tab
+      state.selectedTab = filteredTabGroups[selectedTabGroupIndex].tabs[selectedTabIndex + 1];
+    } else {
+      // if selected tab is not in last tabGroup
+      if (selectedTabGroupIndex < filteredTabGroups.length - 1) {
+        // select first tab in next tabGroup
+        state.selectedTab = filteredTabGroups[selectedTabGroupIndex + 1].tabs[0];
+      } else {
+        // select first tab in first tabGroup
+        state.selectedTab = filteredTabGroups[0].tabs[0];
+      }
+    }
   }
 };
 
