@@ -67,19 +67,17 @@ const mutations = {
       return tab.id === state.selectedTab.id;
     });
 
-    // if selected tab is not last tab in selected tabGroup
     if (selectedTabIndex < filteredTabGroups[selectedTabGroupIndex].tabs.length - 1) {
+      // if selected tab is not last tab in selected tabGroup
       // select next tab
       state.selectedTab = filteredTabGroups[selectedTabGroupIndex].tabs[selectedTabIndex + 1];
-    } else {
+    } else if (selectedTabGroupIndex < filteredTabGroups.length - 1) {
       // if selected tab is not in last tabGroup
-      if (selectedTabGroupIndex < filteredTabGroups.length - 1) {
-        // select first tab in next tabGroup
-        state.selectedTab = filteredTabGroups[selectedTabGroupIndex + 1].tabs[0];
-      } else {
-        // select first tab in first tabGroup
-        state.selectedTab = filteredTabGroups[0].tabs[0];
-      }
+      // select first tab in next tabGroup
+      state.selectedTab = filteredTabGroups[selectedTabGroupIndex + 1].tabs[0];
+    } else {
+      // select first tab in first tabGroup
+      state.selectedTab = filteredTabGroups[0].tabs[0];
     }
   },
   selectPrevTab(state, filteredTabGroups) {
