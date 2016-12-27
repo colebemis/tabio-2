@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import fuseFilter from './fuse-filter';
+import fuseFilter from './utilities/fuse-filter';
 
 Vue.use(Vuex);
 
