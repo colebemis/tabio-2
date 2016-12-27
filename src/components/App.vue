@@ -1,5 +1,10 @@
 <template>
-  <div id="tabio" v-if="isOpen" @keydown.down.prevent="selectNextTab(filteredTabGroups)">
+  <div
+    id="tabio"
+    v-if="isOpen"
+    @keydown.down.prevent="selectNextTab(filteredTabGroups)"
+    @keydown.up.prevent="selectPrevTab(filteredTabGroups)"
+  >
     <input type="text" v-focus :value="filterText" @input="updateFilterText($event.target.value)">
     <p>{{filterText}}</p>
 
@@ -58,7 +63,8 @@
         'closeExtension', // map this.closeExtension() to this.$store.commit('closeExtension')
         'updateFilterText',
         'selectTab',
-        'selectNextTab'
+        'selectNextTab',
+        'selectPrevTab'
       ]),
       ...mapActions([
         'goToTab',
