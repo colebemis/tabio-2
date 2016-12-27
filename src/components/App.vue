@@ -65,7 +65,8 @@
         'selectTab',
         'selectNextTab',
         'selectPrevTab',
-        'selectActiveTab'
+        'selectActiveTab',
+        'selectFirstTab'
       ]),
       ...mapActions([
         'goToTab',
@@ -76,6 +77,8 @@
 
         if (!event.target.value) {
           this.selectActiveTab(this.filteredTabGroups);
+        } else {
+          this.selectFirstTab(this.filteredTabGroups);
         }
       }
     }
