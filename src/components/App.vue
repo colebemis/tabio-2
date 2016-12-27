@@ -2,8 +2,8 @@
   <div
     id="tabio"
     v-if="isOpen"
-    @keydown.down.prevent="selectNextTab(filteredTabGroups)"
-    @keydown.up.prevent="selectPrevTab(filteredTabGroups)"
+    @keydown.down.stop.prevent="selectNextTab(filteredTabGroups)"
+    @keydown.up.stop.prevent="selectPrevTab(filteredTabGroups)"
   >
     <input type="text" v-focus :value="filterText" @input="inputHandler">
     <p>{{filterText}}</p>
