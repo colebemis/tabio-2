@@ -1,7 +1,7 @@
 <template>
   <div id="tabio" v-if="isOpen">
     <input type="text" v-focus :value="filterText" @input="updateFilterText($event.target.value)">
-    <p>{{filterText}}<p>
+    <p>{{filterText}}</p>
 
     <ul v-for="tabGroup in filteredTabGroups" v-if="tabGroup.tabs.length">
       <li v-for="tab in tabGroup.tabs">
