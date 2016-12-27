@@ -41,6 +41,7 @@ function browserActionClickedHandler(store, tabGroups) {
     store.commit('closeExtension');
   } else {
     store.commit('openExtension', tabGroups);
+    store.commit('selectActiveTab', tabGroups);
   }
 }
 
