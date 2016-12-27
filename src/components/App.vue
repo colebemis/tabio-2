@@ -42,8 +42,7 @@
     computed: {
       ...mapState([
         'isOpen', // map this.isOpen to this.$store.state.isOpen
-        'filterText',
-        'tabGroups'
+        'filterText'
       ]),
       ...mapGetters([
         'filteredTabGroups'
