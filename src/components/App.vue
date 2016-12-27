@@ -21,7 +21,7 @@
           active: tab.active,
           focused: tabGroup.focused
         })">Go</button>
-        <button type="button" @click="closeTab(tab.id)">Close</button>
+        <button type="button" @click="closeTab({tabId: tab.id, windowId: tab.windowId})">Close</button>
       </li>
     </ul>
 

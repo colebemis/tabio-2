@@ -133,7 +133,21 @@ const actions = {
       });
     }
   },
-  closeTab({commit}, tabId) {
+  closeTab({commit, getters}, {tabId, windowId}) {
+    const tabGroupIndex = getters.filteredTabGroups.findIndex(tabGroup => tabGroup.id === windowId);
+    const tabIndex = getters.filteredTabGroups[tabGroupIndex].tabs.findIndex(tab => tab.id === tabId);
+
+    const isNotLastTab = tabIndex < getters.filteredTabGroups[tabGroupIndex].tabs.length - 1;
+    const isNotLastTabGroup = tabGroupIndex < getters.filteredTabGroups.length - 1;
+    const isNotFirstTab = tabIndex > 0;
+    const isNotFirstTabGroup = tabGroupIndex > 0;
+
+    if (isNotLastTab || isNotLastTabGroup) {
+      commit('selectNextTab', getters.filteredTabGroups);
+    } else if (isNotFirstTab || isNotFirstTabGroup) {
+      commit('selectPrevTab', getters.filteredTabGroups);
+    }
+
     chrome.runtime.sendMessage({
       action: 'closeTab',
       payload: {tabId}
