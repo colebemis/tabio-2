@@ -11,6 +11,7 @@
       focused: getTabGroupById(selectedTab.windowId, filteredTabGroups).focused
     })"
     @keydown.meta.delete.stop.prevent="closeTab({tabId: selectedTab.id})"
+    @keydown.esc.stop.prevent="closeExtension()"
   >
     <input type="text" v-focus :value="filterText" @input="inputHandler">
     <p>{{filterText}}</p>
