@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import * as getters from './getters';
+import * as actions from './actions'
 import mutations from './mutations';
 
 Vue.use(Vuex);
@@ -10,25 +11,6 @@ const state = {
   filterText: '',
   tabGroups: [],
   selectedTab: {}
-};
-
-const actions = {
-  goToTab({commit}, {tabId, tabGroupId, active, focused}) {
-    if (active && focused) {
-      commit(types.CLOSE_EXTENSION);
-    } else {
-      chrome.runtime.sendMessage({
-        action: 'goToTab',
-        payload: {tabId, tabGroupId}
-      });
-    }
-  },
-  closeTab({commit}, {tabId}) {
-    chrome.runtime.sendMessage({
-      action: 'closeTab',
-      payload: {tabId}
-    });
-  }
 };
 
 export default new Vuex.Store({
