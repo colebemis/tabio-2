@@ -4,6 +4,12 @@
     v-if="isOpen"
     @keydown.down.stop.prevent="selectNextTab(filteredTabGroups)"
     @keydown.up.stop.prevent="selectPrevTab(filteredTabGroups)"
+    @keydown.enter.stop.prevent="goToTab({
+      tabId: selectedTab.id,
+      tabGroupId: selectedTab.windowId,
+      active: selectedTab.active,
+      focused: getTabGroupById(selectedTab.windowId, filteredTabGroups).focused
+    })"
     @keydown.meta.delete.stop.prevent="closeTab({tabId: selectedTab.id})"
   >
     <input type="text" v-focus :value="filterText" @input="inputHandler">
@@ -81,6 +87,9 @@
         } else {
           this.selectFirstTab(this.filteredTabGroups);
         }
+      },
+      getTabGroupById(tabGroupId, tabGroups) {
+        return tabGroups.find(tabGroup => tabGroup.id === tabGroupId);
       }
     }
   }
