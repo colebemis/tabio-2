@@ -39,6 +39,7 @@
 
 <script>
   import {mapState, mapGetters, mapMutations, mapActions} from 'vuex';
+  import * as types from '../store/mutation-types';
 
   export default {
     name: 'app',
@@ -66,16 +67,16 @@
         'filteredTabGroups'
       ])
     },
-    methods: {
-      ...mapMutations([
-        'closeExtension', // map this.closeExtension() to this.$store.commit('closeExtension')
-        'updateFilterText',
-        'selectTab',
-        'selectNextTab',
-        'selectPrevTab',
-        'selectActiveTab',
-        'selectFirstTab'
-      ]),
+    methods:
+      ...mapMutations({
+        closeExtension: types.CLOSE_EXTENSION,
+        updateFilterText: types.UPDATE_FILTER_TEXT,
+        selectTab: types.SELECT_TAB,
+        selectNextTab: types.SELECT_NEXT_TAB,
+        selectPrevTab: types.SELECT_PREV_TAB,
+        selectActiveTab: types.SELECT_ACTIVE_TAB,
+        selectFirstTab: types.SELECT_FIRST_TAB
+      }),
       ...mapActions([
         'goToTab',
         'closeTab'

@@ -1,7 +1,8 @@
 import 'babel-polyfill';
 import Vue from 'vue';
 import Vuex from 'vuex';
-import store from './store';
+import store from './store/index';
+import * as types from './store/mutation-types';
 import App from './components/App';
 
 console.log('Hello from content.js');
@@ -38,16 +39,16 @@ chrome.runtime.onMessage.addListener(({event, payload}) => {
 // TODO: move to event-handlers.js
 function browserActionClickedHandler(store, tabGroups) {
   if (store.state.isOpen) {
-    store.commit('closeExtension');
+    store.commit(types.CLOSE_EXTENSION);
   } else {
-    store.commit('openExtension', tabGroups);
-    store.commit('selectActiveTab', tabGroups);
+    store.commit(types.OPEN_EXTENSION, tabGroups);
+    store.commit(types.SELECT_ACTIVE_TAB, tabGroups);
   }
 }
 
 function extensionDeactivatedHandler(store) {
   if (store.state.isOpen) {
-    store.commit('closeExtension');
+    store.commit(types.CLOSE_EXTENSION);
   }
 }
 
@@ -62,11 +63,11 @@ function tabRemovedHandler(store, {tabId, tabGroupId, tabGroups}) {
     const isNotFirstTabGroup = tabGroupIndex > 0;
 
     if (isNotLastTab || isNotLastTabGroup) {
-      store.commit('selectNextTab', store.getters.filteredTabGroups);
+      store.commit(types.SELECT_NEXT_TAB, store.getters.filteredTabGroups);
     } else if (isNotFirstTab || isNotFirstTabGroup) {
-      store.commit('selectPrevTab', store.getters.filteredTabGroups);
+      store.commit(types.SELECT_PREV_TAB, store.getters.filteredTabGroups);
     }
 
-    store.commit('updateTabGroups', tabGroups);
+    store.commit(types.UPDATE_TAB_GROUPS, tabGroups);
   }
 }

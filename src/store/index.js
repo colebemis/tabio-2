@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import fuseFilter from './utilities/fuse-filter';
+import * as types from './mutation-types';
+import fuseFilter from '../utilities/fuse-filter';
 
 Vue.use(Vuex);
 
@@ -40,25 +41,24 @@ const getters = {
 };
 
 const mutations = {
-  // TODO: use constants for mutation names
-  openExtension(state, tabGroups) {
+  [types.OPEN_EXTENSION](state, tabGroups) {
     state.tabGroups = tabGroups;
     state.isOpen = true;
   },
-  closeExtension(state) {
+  [types.CLOSE_EXTENSION](state) {
     state.isOpen = false;
     state.filterText = ''
   },
-  updateTabGroups(state, tabGroups) {
+  [types.UPDATE_TAB_GROUPS](state, tabGroups) {
     state.tabGroups = tabGroups;
   },
-  updateFilterText(state, filterText) {
+  [types.UPDATE_FILTER_TEXT](state, filterText) {
     state.filterText = filterText;
   },
-  selectTab(state, tab) {
+  [types.SELECT_TAB](state, tab) {
     state.selectedTab = tab;
   },
-  selectNextTab(state, tabGroups) {
+  [types.SELECT_NEXT_TAB](state, tabGroups) {
     if (!tabGroups.length) return;
 
     const selectedTabGroupIndex = tabGroups.findIndex(tabGroup => {
@@ -82,7 +82,7 @@ const mutations = {
       state.selectedTab = tabGroups[0].tabs[0];
     }
   },
-  selectPrevTab(state, tabGroups) {
+  [types.SELECT_PREV_TAB](state, tabGroups) {
     if (!tabGroups.length) return;
 
     const selectedTabGroupIndex = tabGroups.findIndex(tabGroup => {
@@ -110,12 +110,12 @@ const mutations = {
       state.selectedTab = tabGroups[lastTabGroupIndex].tabs[lastTabIndex];
     }
   },
-  selectActiveTab(state, tabGroups) {
+  [types.SELECT_ACTIVE_TAB](state, tabGroups) {
     const focusedTabGroupIndex = tabGroups.findIndex(tabGroup => tabGroup.focused);
     const activeTabIndex = tabGroups[focusedTabGroupIndex].tabs.findIndex(tab => tab.active);
     state.selectedTab = tabGroups[focusedTabGroupIndex].tabs[activeTabIndex];
   },
-  selectFirstTab(state, tabGroups) {
+  [types.SELECT_FIRST_TAB](state, tabGroups) {
     if (!tabGroups.length) return;
 
     state.selectedTab = tabGroups[0].tabs[0];
@@ -125,7 +125,7 @@ const mutations = {
 const actions = {
   goToTab({commit}, {tabId, tabGroupId, active, focused}) {
     if (active && focused) {
-      commit('closeExtension');
+      commit(types.CLOSE_EXTENSION);
     } else {
       chrome.runtime.sendMessage({
         action: 'goToTab',
