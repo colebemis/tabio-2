@@ -7,8 +7,8 @@
     @keydown.enter.stop.prevent="goToTab({
       tabId: selectedTab.id,
       tabGroupId: selectedTab.windowId,
-      active: selectedTab.active,
-      focused: getTabGroupById(selectedTab.windowId, filteredTabGroups).focused
+      isActive: selectedTab.active,
+      isFocused: getTabGroupById(selectedTab.windowId, filteredTabGroups).focused
     })"
     @keydown.meta.delete.stop.prevent="closeTab({tabId: selectedTab.id})"
     @keydown.esc.stop.prevent="closeExtension()"
@@ -26,8 +26,8 @@
         <button type="button" @click="goToTab({
           tabId: tab.id,
           tabGroupId: tab.windowId,
-          active: tab.active,
-          focused: tabGroup.focused
+          isActive: tab.active,
+          isFocused: tabGroup.focused
         })">Go</button>
         <button type="button" @click="closeTab({tabId: tab.id})">Close</button>
       </li>

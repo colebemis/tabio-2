@@ -1,7 +1,7 @@
 import * as types from './mutation-types';
 
-export const goToTab = ({commit}, {tabId, tabGroupId, active, focused}) => {
-  if (active && focused) {
+export const goToTab = ({commit}, {tabId, tabGroupId, isActive, isFocused}) => {
+  if (isActive && isFocused) {
     commit(types.CLOSE_EXTENSION);
   } else {
     chrome.runtime.sendMessage({
