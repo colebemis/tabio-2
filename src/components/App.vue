@@ -67,7 +67,7 @@
         'filteredTabGroups'
       ])
     },
-    methods:
+    methods: {
       ...mapMutations({
         closeExtension: types.CLOSE_EXTENSION,
         updateFilterText: types.UPDATE_FILTER_TEXT,
