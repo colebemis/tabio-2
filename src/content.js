@@ -45,15 +45,15 @@ function browserActionClickedHandler(store, tabGroups) {
   }
 }
 
-function tabDeactivatedHandler(store) {
+function extensionDeactivatedHandler(store) {
   if (store.state.isOpen) {
     store.commit('closeExtension');
   }
 }
 
-function tabRemovedHandler(store, {tabId, windowId, tabGroups}) {
+function tabRemovedHandler(store, {tabId, tabGroupId, tabGroups}) {
   if (store.state.isOpen) {
-    const tabGroupIndex = store.getters.filteredTabGroups.findIndex(tabGroup => tabGroup.id === windowId);
+    const tabGroupIndex = store.getters.filteredTabGroups.findIndex(tabGroup => tabGroup.id === tabGroupId);
     const tabIndex = store.getters.filteredTabGroups[tabGroupIndex].tabs.findIndex(tab => tab.id === tabId);
 
     const isNotLastTab = tabIndex < store.getters.filteredTabGroups[tabGroupIndex].tabs.length - 1;

@@ -29,7 +29,7 @@ function tabRemovedHandler(tabId, removeInfo) {
       event: 'tabRemoved',
       payload: {
         tabId,
-        windowId: removeInfo.windowId, 
+        tabGroupId: removeInfo.windowId,
         tabGroups
       }
     });
@@ -51,7 +51,7 @@ function messageHandler({action, payload}) {
   switch (action) {
     case 'goToTab':
       chrome.tabs.update(payload.tabId, {active: true});
-      chrome.windows.update(payload.windowId, {focused: true});
+      chrome.windows.update(payload.tabGroupId, {focused: true});
       break;
     case 'closeTab':
       chrome.tabs.remove(payload.tabId);

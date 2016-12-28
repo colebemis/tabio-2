@@ -123,13 +123,13 @@ const mutations = {
 };
 
 const actions = {
-  goToTab({commit}, {tabId, windowId, active, focused}) {
+  goToTab({commit}, {tabId, tabGroupId, active, focused}) {
     if (active && focused) {
       commit('closeExtension');
     } else {
       chrome.runtime.sendMessage({
         action: 'goToTab',
-        payload: {tabId, windowId}
+        payload: {tabId, tabGroupId}
       });
     }
   },

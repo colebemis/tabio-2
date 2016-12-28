@@ -18,7 +18,7 @@
         {{tab.title}}
         <button type="button" @click="goToTab({
           tabId: tab.id,
-          windowId: tab.windowId,
+          tabGroupId: tab.windowId,
           active: tab.active,
           focused: tabGroup.focused
         })">Go</button>
