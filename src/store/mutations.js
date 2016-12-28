@@ -82,7 +82,7 @@ export default {
     const activeTabIndex = tabGroups[focusedTabGroupIndex].tabs.findIndex(tab => tab.active);
     state.selectedTab = tabGroups[focusedTabGroupIndex].tabs[activeTabIndex];
   },
-  
+
   [types.SELECT_FIRST_TAB](state, tabGroups) {
     if (!tabGroups.length) return;
 
