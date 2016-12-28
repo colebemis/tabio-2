@@ -1,7 +1,8 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import * as getters from './getters';
 import * as types from './mutation-types';
-import fuseFilter from '../utilities/fuse-filter';
+// import fuseFilter from '../utilities/fuse-filter';
 
 Vue.use(Vuex);
 
@@ -12,33 +13,33 @@ const state = {
   selectedTab: {}
 };
 
-const getters = {
-  orderedTabGroups({tabGroups}) {
-    // make copy of tabGroups array
-    const orderedTabGroups = tabGroups.slice();
-    // find index of focused tabGroup
-    const focusedIndex = tabGroups.findIndex(tabGroup => tabGroup.focused);
-    // remove focused tabGroup from orderedTabGroups and save
-    const focusedTabGroup = orderedTabGroups.splice(focusedIndex, 1)[0];
-    // add focused tabGroup to front of orderedTabGroups
-    orderedTabGroups.unshift(focusedTabGroup);
-
-    return orderedTabGroups;
-  },
-  filteredTabGroups({filterText}, {orderedTabGroups}) {
-    return orderedTabGroups.map(tabGroup => {
-      const filteredTabs = {
-        tabs: fuseFilter({
-          list: tabGroup.tabs,
-          filterText,
-          keys: ['title', 'url']
-        })
-      };
-
-      return Object.assign({}, tabGroup, filteredTabs);
-    }).filter(tabGroup => tabGroup.tabs.length > 0);
-  }
-};
+// const getters = {
+//   orderedTabGroups({tabGroups}) {
+//     // make copy of tabGroups array
+//     const orderedTabGroups = tabGroups.slice();
+//     // find index of focused tabGroup
+//     const focusedIndex = tabGroups.findIndex(tabGroup => tabGroup.focused);
+//     // remove focused tabGroup from orderedTabGroups and save
+//     const focusedTabGroup = orderedTabGroups.splice(focusedIndex, 1)[0];
+//     // add focused tabGroup to front of orderedTabGroups
+//     orderedTabGroups.unshift(focusedTabGroup);
+//
+//     return orderedTabGroups;
+//   },
+//   filteredTabGroups({filterText}, {orderedTabGroups}) {
+//     return orderedTabGroups.map(tabGroup => {
+//       const filteredTabs = {
+//         tabs: fuseFilter({
+//           list: tabGroup.tabs,
+//           filterText,
+//           keys: ['title', 'url']
+//         })
+//       };
+//
+//       return Object.assign({}, tabGroup, filteredTabs);
+//     }).filter(tabGroup => tabGroup.tabs.length > 0);
+//   }
+// };
 
 const mutations = {
   [types.OPEN_EXTENSION](state, tabGroups) {
