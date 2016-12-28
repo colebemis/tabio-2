@@ -1,50 +1,64 @@
 console.log('Hello from background.js');
 console.log('chrome', chrome);
 
-let activeTabId = null;
+let activeInfo = null;
 
 chrome.browserAction.onClicked.addListener(browserActionClickedHandler);
 chrome.tabs.onRemoved.addListener(tabRemovedHandler);
 chrome.tabs.onActivated.addListener(activeTabChangedHandler);
-chrome.windows.onFocusChanged.addListener(activeTabChangedHandler);
+chrome.windows.onFocusChanged.addListener(focusedTabGroupChangedHandler);
 chrome.runtime.onMessage.addListener(messageHandler);
 
 function browserActionClickedHandler(tab) {
-  activeTabId = tab.id;
+  activeInfo = {
+    tabId: tab.id,
+    tabGroupId: tab.windowId
+  };
 
   chrome.windows.getAll({populate: true}, tabGroups => {
-    chrome.tabs.sendMessage(tab.id, {
+    chrome.tabs.sendMessage(activeInfo.tabId, {
       event: 'browserActionClicked',
       payload: {tabGroups}
     });
   });
 }
 
-function tabRemovedHandler(tabId, removeInfo) {
+function tabRemovedHandler(tabId, {windowId}) {
   // if tabio was not activated, do nothing
-  if (activeTabId === null) return;
+  if (activeInfo === null) return;
 
   chrome.windows.getAll({populate: true}, tabGroups => {
-    chrome.tabs.sendMessage(activeTabId, {
+    chrome.tabs.sendMessage(activeInfo.tabId, {
       event: 'tabRemoved',
       payload: {
         tabId,
-        tabGroupId: removeInfo.windowId,
+        tabGroupId: windowId,
         tabGroups
       }
     });
   });
 }
 
-function activeTabChangedHandler() {
-  // if tabio was not activated, do nothing
-  if (activeTabId === null) return;
+function activeTabChangedHandler({windowId}) {
+  // if tabio was not activated or if active tab is not in focused tabGroup, do nothing
+  if (activeInfo === null || windowId !== activeInfo.tabGroupId) return;
 
-  chrome.tabs.sendMessage(activeTabId, {
-    event: 'tabDeactivated'
+  chrome.tabs.sendMessage(activeInfo.tabId, {
+    event: 'extensionDeactivated'
   });
 
-  activeTabId = null;
+  activeInfo = null;
+}
+
+function focusedTabGroupChangedHandler() {
+  // if tabio was not activated, do nothing
+  if (activeInfo === null) return;
+
+  chrome.tabs.sendMessage(activeInfo.tabId, {
+    event: 'extensionDeactivated'
+  });
+
+  activeInfo = null;
 }
 
 function messageHandler({action, payload}) {

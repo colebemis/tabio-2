@@ -26,8 +26,8 @@ chrome.runtime.onMessage.addListener(({event, payload}) => {
     case 'browserActionClicked':
       browserActionClickedHandler(store, payload.tabGroups);
       break;
-    case 'tabDeactivated':
-      tabDeactivatedHandler(store);
+    case 'extensionDeactivated':
+      extensionDeactivatedHandler(store);
       break;
     case 'tabRemoved':
       tabRemovedHandler(store, payload);
