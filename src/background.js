@@ -20,14 +20,18 @@ function browserActionClickedHandler(tab) {
   });
 }
 
-function tabRemovedHandler() {
+function tabRemovedHandler(tabId, removeInfo) {
   // if tabio was not activated, do nothing
   if (activeTabId === null) return;
 
   chrome.windows.getAll({populate: true}, tabGroups => {
     chrome.tabs.sendMessage(activeTabId, {
-      event: 'tabGroupsChanged',
-      payload: {tabGroups}
+      event: 'tabRemoved',
+      payload: {
+        tabId,
+        windowId: removeInfo.windowId, 
+        tabGroups
+      }
     });
   });
 }

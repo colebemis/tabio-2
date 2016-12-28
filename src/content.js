@@ -29,8 +29,8 @@ chrome.runtime.onMessage.addListener(({event, payload}) => {
     case 'tabDeactivated':
       tabDeactivatedHandler(store);
       break;
-    case 'tabGroupsChanged':
-      tabGroupsChangedHandler(store, payload.tabGroups);
+    case 'tabRemoved':
+      tabRemovedHandler(store, payload);
       break;
   }
 });
@@ -51,8 +51,22 @@ function tabDeactivatedHandler(store) {
   }
 }
 
-function tabGroupsChangedHandler(store, tabGroups) {
+function tabRemovedHandler(store, {tabId, windowId, tabGroups}) {
   if (store.state.isOpen) {
+    const tabGroupIndex = store.getters.filteredTabGroups.findIndex(tabGroup => tabGroup.id === windowId);
+    const tabIndex = store.getters.filteredTabGroups[tabGroupIndex].tabs.findIndex(tab => tab.id === tabId);
+
+    const isNotLastTab = tabIndex < store.getters.filteredTabGroups[tabGroupIndex].tabs.length - 1;
+    const isNotLastTabGroup = tabGroupIndex < store.getters.filteredTabGroups.length - 1;
+    const isNotFirstTab = tabIndex > 0;
+    const isNotFirstTabGroup = tabGroupIndex > 0;
+
+    if (isNotLastTab || isNotLastTabGroup) {
+      store.commit('selectNextTab', store.getters.filteredTabGroups);
+    } else if (isNotFirstTab || isNotFirstTabGroup) {
+      store.commit('selectPrevTab', store.getters.filteredTabGroups);
+    }
+
     store.commit('updateTabGroups', tabGroups);
   }
 }
