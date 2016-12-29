@@ -14,8 +14,6 @@
     @keydown.esc.stop.prevent="closeExtension()"
   >
     <modal></modal>
-    <input type="text" v-focus :value="filterText" @input="inputHandler">
-    <p>{{filterText}}</p>
 
     <ul v-for="tabGroup in filteredTabGroups">
       <li
@@ -48,24 +46,9 @@
     components: {
       Modal
     },
-    directives: {
-      focus: {
-        // when the bound element is inserted into the DOM
-        inserted(el) {
-          // focus the element
-          el.focus();
-        },
-        // after the containing component and its children have updated
-        componentUpdated(el) {
-          // focus the element
-          el.focus();
-        }
-      }
-    },
     computed: {
       ...mapState([
         'isOpen', // map this.isOpen to this.$store.state.isOpen
-        'filterText',
         'selectedTab'
       ]),
       ...mapGetters([
@@ -75,26 +58,14 @@
     methods: {
       ...mapMutations({
         closeExtension: types.CLOSE_EXTENSION,
-        updateFilterText: types.UPDATE_FILTER_TEXT,
         selectTab: types.SELECT_TAB,
         selectNextTab: types.SELECT_NEXT_TAB,
         selectPrevTab: types.SELECT_PREV_TAB,
-        selectActiveTab: types.SELECT_ACTIVE_TAB,
-        selectFirstTab: types.SELECT_FIRST_TAB
       }),
       ...mapActions([
         'goToTab',
         'closeTab'
       ]),
-      inputHandler(event) {
-        this.updateFilterText(event.target.value);
-
-        if (!event.target.value) {
-          this.selectActiveTab(this.filteredTabGroups);
-        } else {
-          this.selectFirstTab(this.filteredTabGroups);
-        }
-      },
       getTabGroupById(tabGroupId, tabGroups) {
         return tabGroups.find(tabGroup => tabGroup.id === tabGroupId);
       }
