@@ -16,20 +16,7 @@
     <modal></modal>
 
     <ul v-for="tabGroup in filteredTabGroups">
-      <li
-        v-for="tab in tabGroup.tabs"
-        :class="{selected: tab.id === selectedTab.id}"
-        @mouseenter="selectTab(tab)"
-      >
-        {{tab.title}}
-        <button type="button" @click="goToTab({
-          tabId: tab.id,
-          tabGroupId: tab.windowId,
-          isActive: tab.active,
-          isFocused: tabGroup.focused
-        })">Go</button>
-        <button type="button" @click="closeTab({tabId: tab.id})">Close</button>
-      </li>
+      <tab v-for="tab in tabGroup.tabs" :tab="tab" :is-focused="tabGroup.focused"></tab>
     </ul>
 
     <button type="button" @click="closeExtension()">Hide</button>
@@ -38,13 +25,15 @@
 
 <script>
   import Modal from './Modal';
+  import Tab from './Tab';
   import {mapState, mapGetters, mapMutations, mapActions} from 'vuex';
   import * as types from '../store/mutation-types';
 
   export default {
     name: 'App',
     components: {
-      Modal
+      Modal,
+      Tab
     },
     computed: {
       ...mapState([
@@ -58,7 +47,6 @@
     methods: {
       ...mapMutations({
         closeExtension: types.CLOSE_EXTENSION,
-        selectTab: types.SELECT_TAB,
         selectNextTab: types.SELECT_NEXT_TAB,
         selectPrevTab: types.SELECT_PREV_TAB,
       }),
@@ -76,8 +64,4 @@
 <style lang="stylus" scoped>
   #tabio
     color blue
-
-  .selected
-    color white
-    background blue
 </style>
