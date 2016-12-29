@@ -1,7 +1,10 @@
 <template>
   <li
     class="tab"
-    :class="{'tab-selected': tab.id === selectedTab.id}"
+    :class="{
+      'tab-active': tab.active,
+      'tab-selected': tab.id === selectedTab.id
+    }"
     @mouseenter="selectTab(tab)"
     @click="goToTab({
       tabId: tab.id,
@@ -62,6 +65,9 @@
 <style lang="stylus" scoped>
   .tab
     cursor pointer
+
+  .tab-active
+    background-color yellow
 
   .tab-selected
     color white
