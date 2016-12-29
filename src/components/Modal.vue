@@ -1,15 +1,19 @@
 <template>
   <div class="modal">
-    <input type="text" v-focus :value="filterText" @input="inputHandler">
+    <filter-box :filter-text="filterText" @input="inputHandler"></filter-box>
   </div>
 </template>
 
 <script>
+import FilterBox from './FilterBox';
 import {mapState, mapGetters, mapMutations} from 'vuex';
 import * as types from '../store/mutation-types';
 
 export default {
   name: 'Modal',
+  components: {
+    FilterBox
+  },
   computed: {
     ...mapState([
       'filterText'
@@ -31,20 +35,6 @@ export default {
         this.selectActiveTab(this.filteredTabGroups);
       } else {
         this.selectFirstTab(this.filteredTabGroups);
-      }
-    }
-  },
-  directives: {
-    focus: {
-      // when the bound element is inserted into the DOM
-      inserted(el) {
-        // focus the element
-        el.focus();
-      },
-      // after the containing component and its children have updated
-      componentUpdated(el) {
-        // focus the element
-        el.focus();
       }
     }
   }
