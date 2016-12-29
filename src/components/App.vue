@@ -39,7 +39,7 @@
 </template>
 
 <script>
-  import Popover from './Popover';
+  import Modal from './Modal';
   import {mapState, mapGetters, mapMutations, mapActions} from 'vuex';
   import * as types from '../store/mutation-types';
 
