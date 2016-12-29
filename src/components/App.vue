@@ -13,7 +13,7 @@
     @keydown.meta.delete.stop.prevent="closeTab({tabId: selectedTab.id})"
     @keydown.esc.stop.prevent="closeExtension()"
   >
-    <popover></popover>
+    <modal></modal>
     <input type="text" v-focus :value="filterText" @input="inputHandler">
     <p>{{filterText}}</p>
 
@@ -46,7 +46,7 @@
   export default {
     name: 'App',
     components: {
-      Popover
+      Modal
     },
     directives: {
       focus: {
