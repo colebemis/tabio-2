@@ -13,6 +13,7 @@
     @keydown.meta.delete.stop.prevent="closeTab({tabId: selectedTab.id})"
     @keydown.esc.stop.prevent="closeExtension()"
   >
+    <popover></popover>
     <input type="text" v-focus :value="filterText" @input="inputHandler">
     <p>{{filterText}}</p>
 
@@ -38,11 +39,15 @@
 </template>
 
 <script>
+  import Popover from './Popover';
   import {mapState, mapGetters, mapMutations, mapActions} from 'vuex';
   import * as types from '../store/mutation-types';
 
   export default {
-    name: 'app',
+    name: 'App',
+    components: {
+      Popover
+    },
     directives: {
       focus: {
         // when the bound element is inserted into the DOM
