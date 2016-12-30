@@ -1,18 +1,21 @@
 <template>
   <div class="modal">
     <filter-box :filter-text="filterText" @input="inputHandler"></filter-box>
+    <tab-groups :tab-groups="filteredTabGroups"></tab-groups>
   </div>
 </template>
 
 <script>
 import FilterBox from './FilterBox';
+import TabGroups from './TabGroups';
 import {mapState, mapGetters, mapMutations} from 'vuex';
 import * as types from '../store/mutation-types';
 
 export default {
   name: 'Modal',
   components: {
-    FilterBox
+    FilterBox,
+    TabGroups
   },
   computed: {
     ...mapState([

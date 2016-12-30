@@ -14,28 +14,22 @@
     @keydown.esc.stop.prevent="closeExtension()"
   >
     <modal></modal>
-
-    <tab-groups :tab-groups="filteredTabGroups"></tab-groups>
-
-    <button type="button" @click="closeExtension()">Hide</button>
   </div>
 </template>
 
 <script>
   import Modal from './Modal';
-  import TabGroups from './TabGroups';
   import {mapState, mapGetters, mapMutations, mapActions} from 'vuex';
   import * as types from '../store/mutation-types';
 
   export default {
     name: 'App',
     components: {
-      Modal,
-      TabGroups
+      Modal
     },
     computed: {
       ...mapState([
-        'isOpen', // map this.isOpen to this.$store.state.isOpen
+        'isOpen',
         'selectedTab'
       ]),
       ...mapGetters([
