@@ -63,30 +63,81 @@
 </script>
 
 <style lang="stylus" scoped>
+  @require '../styles/colors';
+
   .tab
+    display flex
+    flex-direction row
+    align-items center
+    height 40px
+    padding 0 6px
+    line-height @height
+    border-radius 3px
     cursor pointer
 
   .tab-active
-    background-color yellow
+    .tab-title
+      color color-primary
+
+    .tab-url
+      color rgba(color-primary, 0.7)
 
   .tab-selected
     color white
-    background-color blue
+    background-color color-primary
+
+    .tab-title
+      color color-text-light-primary
+
+    .tab-url
+      color color-text-light-secondary
+
+    .tab-close
+      display block
 
   .tab-favicon
     width 16px
     height 16px
+    flex 0 0 auto
+    margin 0 6px
+    line-height 0
 
   .tab-favicon-hidden
     visibility hidden
 
+  .tab-title
+    flex 0 0 auto
+    max-width 50%
+    padding 0 6px
+    color color-text-dark-primary
+    white-space nowrap
+    overflow hidden
+    text-overflow ellipsis
+
+  .tab-url
+    flex 1 1 auto
+    padding 0 6px
+    color color-text-dark-secondary
+    white-space nowrap
+    overflow hidden
+    text-overflow ellipsis
+
+  .tab-close
+    display none
+    flex 0 0 auto
+    padding 6px
+    line-height 0
+    border-radius 2px
+
+    &:hover
+      background-color color-border
+      
   .tab-close-icon
     width 16px
     height 16px
     fill none
-    stroke #000
+    stroke #fff
     stroke-width 1
     stroke-linecap round
     stroke-linecap round
-    background-color #fff
 </style>

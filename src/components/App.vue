@@ -55,5 +55,6 @@
 
 <style lang="stylus" scoped>
   #tabio
-    color blue
+    -webkit-font-smoothing antialiased
+    -moz-osx-font-smoothing grayscale
 </style>
