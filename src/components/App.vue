@@ -15,7 +15,7 @@
   >
     <modal></modal>
 
-    <tab-group v-for="tabGroup in filteredTabGroups" :tab-group="tabGroup"></tab-group>
+    <tab-groups :tab-groups="filteredTabGroups"></tab-groups>
 
     <button type="button" @click="closeExtension()">Hide</button>
   </div>
@@ -23,8 +23,7 @@
 
 <script>
   import Modal from './Modal';
-  import TabGroup from './TabGroup';
-  import Tab from './Tab';
+  import TabGroups from './TabGroups';
   import {mapState, mapGetters, mapMutations, mapActions} from 'vuex';
   import * as types from '../store/mutation-types';
 
@@ -32,8 +31,7 @@
     name: 'App',
     components: {
       Modal,
-      TabGroup,
-      Tab
+      TabGroups
     },
     computed: {
       ...mapState([
