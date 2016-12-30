@@ -2,7 +2,7 @@
   <li
     class="tab"
     :class="{
-      'tab-active': tab.active,
+      'tab-active': tab.active && isFocused,
       'tab-selected': tab.id === selectedTab.id
     }"
     @mouseenter="selectTab(tab)"
@@ -74,6 +74,7 @@
     line-height @height
     border-radius 3px
     cursor pointer
+    text-align left
 
   .tab-active
     .tab-title

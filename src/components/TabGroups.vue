@@ -1,5 +1,5 @@
 <template>
-  <div class="tab-groups">
+  <div class="tab-groups" v-if="tabGroups.length">
     <tab-group v-for="tabGroup in tabGroups" :tab-group="tabGroup"></tab-group>
   </div>
 </template>

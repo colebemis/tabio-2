@@ -24,6 +24,7 @@
   .tab-group
     margin 0
     padding 8px
+    position relative
 
     &:not(:last-of-type)
       border-bottom 1px solid color-border
