@@ -12,6 +12,7 @@
     })"
     @keydown.meta.delete.stop.prevent="closeTab({tabId: selectedTab.id})"
     @keydown.esc.stop.prevent="closeExtension()"
+    @click="closeExtension()"
   >
     <modal></modal>
   </div>
