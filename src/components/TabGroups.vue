@@ -19,4 +19,14 @@
 </script>
 
 <style lang="stylus" scoped>
+  @require '../styles/colors'
+
+  .tab-groups
+    flex 1 1 auto
+    border-top 1px solid color-border
+    overflow auto
+    user-select none
+
+    &::-webkit-scrollbar
+      display none
 </style>

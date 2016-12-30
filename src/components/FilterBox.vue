@@ -32,4 +32,19 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+  @require '../styles/colors'
+
+  .filter-box
+    flex 0 0 auto
+    width 100%
+    height 64px
+    padding 0 20px
+    font-family -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif
+    font-size 28px
+    font-weight 300
+    line-height @height
+    color color-text-dark-primary
+    border none
+    background transparent
+    outline none
 </style>

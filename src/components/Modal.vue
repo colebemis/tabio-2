@@ -45,4 +45,21 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+  @require '../styles/colors'
+
+  .modal
+    position static
+    display flex
+    flex-direction column
+    align-items stretch
+    width 100%
+    max-width 560px
+    max-height 480px
+    margin 0
+    padding 0
+    background-color #fff
+    box-shadow 0 0 0 1px color-border, 0 25px 60px 10px rgba(0, 0, 0, 0.26)
+    border-radius 4px
+    overflow hidden
+
 </style>

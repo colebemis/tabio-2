@@ -55,6 +55,21 @@
 
 <style lang="stylus" scoped>
   #tabio
+    z-index 999999
+    display flex
+    flex-direction column
+    align-items center
+    position fixed
+    top 0
+    right 0
+    bottom 0
+    left 0
+    padding 12vh 16px 8vh
+    font-family -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif
+    font-size 14px
+    font-weight 400
+    font-style normal
+    letter-spacing 0
     -webkit-font-smoothing antialiased
     -moz-osx-font-smoothing grayscale
 </style>

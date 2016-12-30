@@ -131,7 +131,7 @@
 
     &:hover
       background-color color-border
-      
+
   .tab-close-icon
     width 16px
     height 16px
