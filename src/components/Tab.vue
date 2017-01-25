@@ -19,7 +19,8 @@
       :src="tab.favIconUrl"
       alt="Favicon"
     >
-    <span class="tab-title">{{tab.title}}</span>
+    <span v-if="tab.title" class="tab-title">{{tab.title}}</span>
+    <span v-else class="tab-title">(Untitled)</span>
     <span class="tab-url">{{tabUrl}}</span>
     <div class="tab-close" @click.stop="closeTab({tabId: tab.id})">
       <svg class="tab-close-icon" viewBox="0 0 16 16">
