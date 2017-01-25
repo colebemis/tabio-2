@@ -38,6 +38,7 @@ export default {
     flex 0 0 auto
     width 100%
     height 64px
+    margin 0
     padding 0 20px
     font-family -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif
     font-size 28px
@@ -45,6 +46,9 @@ export default {
     line-height @height
     color color-text-dark-primary
     border none
+    border-bottom 1px solid color-border
     background transparent
     outline none
+    box-shadow none
+    box-sizing border-box
 </style>

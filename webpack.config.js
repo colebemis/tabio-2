@@ -9,7 +9,6 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    // TODO: understand publicPath property
     filename: '[name].js'
   },
   module: {

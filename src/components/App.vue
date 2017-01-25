@@ -2,8 +2,8 @@
   <div
     id="tabio"
     v-if="isOpen"
-    @keydown.down.stop.prevent="selectNextTab(filteredTabGroups)"
     @keydown.up.stop.prevent="selectPrevTab(filteredTabGroups)"
+    @keydown.down.stop.prevent="selectNextTab(filteredTabGroups)"
     @keydown.enter.stop.prevent="goToTab({
       tabId: selectedTab.id,
       tabGroupId: selectedTab.windowId,
@@ -73,4 +73,5 @@
     letter-spacing 0
     -webkit-font-smoothing antialiased
     -moz-osx-font-smoothing grayscale
+
 </style>
