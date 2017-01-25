@@ -49,6 +49,33 @@
       ]),
       getTabGroupById(tabGroupId, tabGroups) {
         return tabGroups.find(tabGroup => tabGroup.id === tabGroupId);
+      },
+      scrollToSelection() {
+        this.$nextTick(function () {
+          const padding = 8;
+
+          const container = this.$el.querySelector('.tab-groups');
+          const containerTop = container.scrollTop;
+          const containerBottom = container.scrollTop + container.offsetHeight;
+
+          const selectedTab = this.$el.querySelector('.tab-selected');
+          const selectedTabTop = (selectedTab.offsetParent.offsetTop - container.offsetTop) + selectedTab.offsetTop;
+          const selectedTabBottom = selectedTabTop + selectedTab.offsetHeight;
+
+          if (selectedTabTop < (containerTop + padding)) {
+            container.scrollTop += selectedTabTop - (containerTop + padding);
+          }
+
+          if (selectedTabBottom > (containerBottom - padding)) {
+            container.scrollTop += selectedTabBottom - (containerBottom - padding);
+          }
+
+        });
+      }
+    },
+    watch: {
+      selectedTab: function () {
+        this.scrollToSelection();
       }
     }
   }
